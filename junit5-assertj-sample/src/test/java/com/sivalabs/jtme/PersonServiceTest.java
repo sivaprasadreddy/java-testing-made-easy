@@ -4,8 +4,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PersonServiceTest {
 
@@ -22,7 +26,26 @@ class PersonServiceTest {
         Person person = personService.create(new Person(null, "Siva", "siva@gmail.com"));
         assertThat(person.getId()).isNotNull();
         assertThat(person.getName()).isEqualTo("Siva");
-        assertThat(person.getEmail()).isEqualTo("siva@gmail.com");
+        assertThat(person.getEmail()).isEqualTo("siva@gmail.com").endsWith("@gmail.com");
+    }
+
+    @Test
+    void shouldThrowExceptionWhenCreatePersonWithDuplicateEmail() {
+        String email = UUID.randomUUID().toString()+"@gmail.com";
+        personService.create(new Person(null, "Siva", email));
+
+        //Junit 5 assertion
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            personService.create(new Person(null, "Siva", email));
+        });
+        assertTrue(exception.getMessage()
+                .contentEquals("Person with email '"+email+"' already exists"));
+
+        //Assertj assertion
+        assertThatThrownBy(()-> {
+            personService.create(new Person(null, "Siva", email));
+        }).isInstanceOf(RuntimeException.class)
+          .hasMessage("Person with email '"+email+"' already exists");
     }
 
     @Test
