@@ -25,7 +25,7 @@ public class Person {
                 '}';
     }
 
-    /*@Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -42,7 +42,7 @@ public class Person {
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
-    }*/
+    }
 
     public Long getId() {
         return id;

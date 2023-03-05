@@ -56,19 +56,12 @@ class PersonServiceTest {
         assertThat(name).containsIgnoringCase("pra");
         assertThat(age).isGreaterThan(30);
 
+        /* ================================================ */
         Person person1 = new Person(1L, "Siva", "siva@gmail.com");
         Person person2 = new Person(2L, "Prasad", "prasad@gmail.com");
-        Person person3 = new Person(3L, "Siva", "sivalabs@gmail.com");
+        Person person3 = new Person(1L, "Siva", "siva@gmail.com");
 
-        List<Person> personList = List.of(person1, person2, person3);
-        Person person = new Person(2L, "Prasad", "prasad@gmail.com");
-
-        assertThat(personList).extracting("id").contains(2L, 3L);
-        assertThat(personList).extracting("id").containsAll(List.of(1L, 2L, 3L));
-        //using equals() and hashCode()
-        //assertThat(personList).contains(person);
-
-        assertThat(person).usingRecursiveComparison().isEqualTo(person2);
+        assertThat(person1).usingRecursiveComparison().isEqualTo(person3);
 
         Person person4 = new Person(null, "Siva", "sivalabs@gmail.com");
         Person person5 = new Person(null, "Siva", "sivalabs@gmail.com");
@@ -81,5 +74,17 @@ class PersonServiceTest {
                 .usingRecursiveComparison()
                 .comparingOnlyFields("name", "email")
                 .isEqualTo(person5);
+
+        /* ================================================ */
+        List<Person> personList = List.of(person1, person2, person4);
+        Person person = new Person(2L, "Prasad", "prasad@gmail.com");
+
+        assertThat(personList).contains(person);
+
+        assertThat(person)
+                .usingRecursiveComparison()
+                .comparingOnlyFields("id")
+                .isIn(personList);
+
     }
 }
