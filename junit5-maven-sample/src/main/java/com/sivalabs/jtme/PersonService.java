@@ -48,4 +48,8 @@ public class PersonService {
             throw new RuntimeException(message);
         }
     }
+
+    public void deleteAll() {
+        repo.deleteAll();
+    }
 }

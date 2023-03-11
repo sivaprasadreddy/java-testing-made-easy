@@ -45,4 +45,8 @@ public class PersonRepository {
         }
         PERSON_DB.remove(id);
     }
+
+    public void deleteAll() {
+        PERSON_DB.clear();
+    }
 }
