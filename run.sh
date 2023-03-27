@@ -8,6 +8,7 @@ modules=(
   "junit4-and-5-maven-sample"
   "junit5-assertj-sample"
   "junit5-mockito-sample"
+  "testcontainers-demo"
 )
 
 for dir in "${modules[@]}"; do
