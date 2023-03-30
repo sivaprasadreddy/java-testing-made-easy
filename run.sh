@@ -9,6 +9,8 @@ modules=(
   "junit5-assertj-sample"
   "junit5-mockito-sample"
   "testcontainers-demo"
+  "spring-boot-kafka-testcontainers-demo"
+  "spring-boot-rabbitmq-testcontainers-demo"
 )
 
 for dir in "${modules[@]}"; do
