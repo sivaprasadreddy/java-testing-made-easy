@@ -11,6 +11,8 @@ modules=(
   "testcontainers-demo"
   "spring-boot-kafka-testcontainers-demo"
   "spring-boot-rabbitmq-testcontainers-demo"
+  "spring-boot-wiremock-demo"
+  "spring-boot-mockserver-demo"
 )
 
 for dir in "${modules[@]}"; do
