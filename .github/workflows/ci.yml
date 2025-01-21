@@ -3,7 +3,7 @@ name: Build
 on:
   push:
     branches:
-      - '**'
+      - 'main'
 jobs:
   build:
     name: Build
@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         distribution: [ 'temurin' ]
-        java: [ '17', '19']
+        java: [ '17']
 
     steps:
       - uses: actions/checkout@v3
